@@ -7,6 +7,7 @@ namespace KafkaMain
         static void Main(string[] args)
         {
             ServerStartup.StartKafkaServer();
+            ServerSettings.AddSettings();
         }
     }
 }
