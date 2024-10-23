@@ -16,21 +16,15 @@ namespace KafkaMain
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = "cmd.exe",
+                    // opening a 2 new cmds and running there zookeeper and kafka server
                     Arguments = "/c start cmd.exe /k \"cd C:\\kafka && .\\bin\\windows\\zookeeper-startup.bat .\\config\\zookeeper.properties\"",
-                    RedirectStandardInput = true,      // Redirect input so we can send commands
-
-                    UseShellExecute = false,           // Do not use shell execute
+                    RedirectStandardInput = true,     
+                    UseShellExecute = false,     
                     CreateNoWindow = false
                 }
             };
-            Console.WriteLine("going to start");
             process.Start();
-            //process.StandardInput.WriteLine(@"");
-            //process.StandardInput.WriteLine("cd c");
-            //process.StandardInput.WriteLine("cd kafka");
-            //string output = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
-            //Console.WriteLine(output);
         }
     }
 }
