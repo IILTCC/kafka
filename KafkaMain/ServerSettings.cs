@@ -17,10 +17,13 @@ namespace KafkaMain
             string[] topicNames = new string[4] { "FlightBoxDownIcd","FlightBoxUpIcd","FiberBoxUpIcd","FiberBoxDownIcd"};
             AdminClientConfig config = new AdminClientConfig
             {
-                BootstrapServers = KAFKA_URL;
+                BootstrapServers = KAFKA_URL
             };
             IAdminClient adminClient = new AdminClientBuilder(config).Build();
             List<string> allTopics = (from i in WaitForKafka(adminClient) select i.Topic).ToList(); 
+
+            //adminClient.DeleteTopicsAsync(allTopics.ToArray());
+            
             CreateTopics(allTopics, adminClient,topicNames);
         }
         private static void CreateTopics(List<string>topicList,IAdminClient adminClient,string[] topicNames)
@@ -54,19 +57,16 @@ namespace KafkaMain
                 try
                 {
                     var metadata = adminClient.GetMetadata(TimeSpan.FromSeconds(5));
-                    if (metadata.Topics.Count > 0) 
-                    {
-                        isKafkaRunning = true; 
-                        return metadata.Topics;
-                    }
+
+                    isKafkaRunning = true; 
+                    return metadata.Topics;
+                    
                 }
                 catch (KafkaException e)
                 {
-                    Thread.Sleep(200); 
                 }
                 catch (Exception ex)
                 {
-                    Thread.Sleep(200);
                 }
             }
             return null;
