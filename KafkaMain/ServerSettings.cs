@@ -14,7 +14,7 @@ namespace KafkaMain
         private const string KAFKA_URL = "localhost:9092";
         public static void AddSettings()
         {
-            string[] topicNames = new string[4] { "FlightBoxDownIcd","FlightBoxUpIcd","FiberBoxUpIcd","FiberBoxDownIcd"};
+            string[] topicNames = new string[5] { "FlightBoxDownIcd","FlightBoxUpIcd","FiberBoxUpIcd","FiberBoxDownIcd","TelemetryStatistics"};
             AdminClientConfig config = new AdminClientConfig
             {
                 BootstrapServers = KAFKA_URL
